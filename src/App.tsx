@@ -38,6 +38,7 @@ import { BottomSheet } from "@alfalab/core-components/bottom-sheet";
 import { AScoresCircleMIcon } from "@alfalab/icons-glyph/AScoresCircleMIcon";
 import { CardMIcon } from "@alfalab/icons-glyph/CardMIcon";
 import { MailMIcon } from "@alfalab/icons-glyph/MailMIcon";
+import { sendDataToGA } from "./utils/events.ts";
 
 interface Game {
   title: string;
@@ -319,7 +320,7 @@ export const App = () => {
   const submit = () => {
     setLoading(true);
 
-    Promise.resolve().then(() => {
+    sendDataToGA({game: selectedGame?.title as string}).then(() => {
       LS.setItem(LSKeys.ShowThx, true);
       setThx(true);
       setLoading(false);
